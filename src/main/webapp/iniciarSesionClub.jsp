@@ -24,7 +24,7 @@
         <h3 class="text-center mb-4"><b>Iniciar Sesión Club</b></h3>
 
         <!-- Formulario de inicio de sesiÃ³n -->
-        <form id="loginClubForm" action="/club/login" method="post">
+        <form id="loginClubForm" action="/login/club" method="post">
             <!-- Correo -->
             <div class="mb-3">
                 <input type="text" id="email" class="form-control" placeholder="Introduzca su email" required>

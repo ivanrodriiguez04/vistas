@@ -123,9 +123,56 @@ $('#registerUserForm').submit(function (event) {
     });
 });
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Funcion para el registro del club
+// Función para el registro del club
+$('#registerClubForm').submit(function (event) {
+    event.preventDefault(); // Evita el envío tradicional del formulario
+
+    // Obtener valores del formulario
+    var nombreClub = $('#nombreClub').val();
+    var sedeClub = $('#sedeClub').val();
+    var emailClub = $('#emailClub').val();
+    var passwordClub = $('#passwordClub').val();
+    var confirmPasswordClub = $('#confirmPasswordClub').val();
+
+    // Validar que las contraseñas coincidan
+    if (passwordClub !== confirmPasswordClub) {
+        alert('Las contraseñas no coinciden.');
+        return;
+    }
+
+    // Validar que todos los campos estén completos
+    if (!nombreClub || !sedeClub || !emailClub || !passwordClub) {
+        alert('Todos los campos son obligatorios.');
+        return;
+    }
+
+    // Crear el DTO
+    var registroDto = {
+        nombreClub: nombreClub,
+        sedeClub: sedeClub,
+        emailClub: emailClub,
+        passwordClub: passwordClub
+    };
+
+    // Enviar la solicitud AJAX
+    $.ajax({
+        url: 'http://localhost:8081/api/registro/club', // Endpoint correcto
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(registroDto),
+        success: function (response) {
+            alert(response.mensaje || 'Registro exitoso. Ahora puedes iniciar sesión.');
+            window.location.href = '/vistaMotos/iniciarSesionClub.jsp'; // Redirige al login
+        },
+        error: function (xhr, status, error) {
+            console.error('Error al intentar registrar: ', error);
+            alert('Error al intentar registrar. Código de estado: ' + xhr.status);
+        }
+    });
+});
 
 
 
